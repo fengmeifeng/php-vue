@@ -1,7 +1,7 @@
 <!--
  * @Author: fengmeifeng
  * @Date: 2020-04-20 16:11:54
- * @LastEditTime: 2020-04-21 16:31:24
+ * @LastEditTime: 2020-04-22 15:51:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\src\components\header.vue
@@ -41,7 +41,7 @@ export default {
   data () {
     return {
       activeIndex: '1',
-      userName: '管理员',
+      userName: '',
       headerImg: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1587447090979&di=15927a9e64433c67e87dc7b02f4b1724&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fforum%2Fpic%2Fitem%2Fad1e93b2551ca64713df9b13.jpg%3Fv%3Dtbs'
     }
   },
@@ -66,6 +66,7 @@ export default {
     }
   },
   mounted () {
+    this.userName = JSON.parse(localStorage.getItem('userInfor')).name
   }
 }
 </script>

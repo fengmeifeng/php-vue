@@ -84,7 +84,7 @@ class Index extends Base {
 		if(!is_post()) return error("不是POST提交");
 		$data = $this->check(true);
 		if (empty($data['id'])) return error("ID不能为空");
-		$res = $this->model->edit($data, ['id'=>$data['id']]);
+		$res = $this->model->edit($data, ['cid'=>$data['id']]);
 		if (!$res) return error("编辑失败");
 		return success([], "编辑成功");
 	}
@@ -99,23 +99,59 @@ class Index extends Base {
 		if(empty($id)) return error("请传ID");
 		$where = [
 			'is_delete' => 0,
-			'id'        => $id,
+			'cid'       => $id,
 		];
 		$field = 'pid,name,path,icon,add_time';
 		$info = $this->model->getRs($where, $field);
 		$info['add_time'] = date('Y-m-d H:i:s', $info['add_time']);
 		return success($info);
 	}
+	/**
+	 * 删除
+	 * @author 冯美峰 2020-04-16
+	 * @param int $id ID
+	 * @return
+	 */
 	public function del() {
 		if(!is_post()) return error("不是POST提交");
-		$data = $this->request->param();
-		if (empty($data['id'])) return error("ID不能为空");
+		$id = input('id');
+		if (empty($id)) return error("ID不能为空");
 		$where = [
-			'id' => $data['id']
+			'cid' => $id
 		];
 		$res = $this->model->edit(['is_delete'=>time()], $where);
 		if(!$res) return error("删除失败");
 		return success([], "删除成功");
+	}
+	/**
+	 * 栏目递归
+	 * @author 冯美峰 2020-04-22
+	 * @return 
+	 */
+	public function page() {
+		$where = ['is_delete'=>0];
+		$list = $this->model->getPage($where);
+		$newList = $this->getSonCategory($list);
+		return success($newList);
+	}
+	/**
+	 * 获得子分类
+	 * @param $category
+	 * @param int $pid
+	 * @return array
+	 */
+	public function getSonCategory($category, $pid=0){
+    $arr  = array();
+    foreach ($category as $key=>$value){
+    	$value['index'] = (string)$value['cid'];
+      if ($value['pid'] == $pid){
+					// $arr[] = $value;
+					// $this->getSonCategory($category,$value['cid']);
+          $value['children'] = $this->getSonCategory($category,$value['cid']);
+          $arr[] = $value;
+      }
+    }
+    return $arr;
 	}
 }
 ?>

@@ -1,7 +1,7 @@
 /*
  * @Author: fengmeifeng
  * @Date: 2020-04-20 14:23:11
- * @LastEditTime: 2020-04-21 16:15:44
+ * @LastEditTime: 2020-04-22 14:52:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\src\main.js
@@ -11,6 +11,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 
 /* 引入ElementUI */
 import ElementUI from 'element-ui'
@@ -45,6 +46,7 @@ router.beforeEach((to, from, next) => {
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

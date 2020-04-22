@@ -4,7 +4,7 @@ use think\Model;
 use think\Db;
 class MenuModel extends Model {
 	public function __construct() {}
-	protected $table_name = "sys_menu";
+	protected $table_name = "menu";
 	public function getList($where, $field="*", $pageSize='10', $page='1') {
 		$list = Db::name($this->table_name)->field($field)->where($where)->page($page, $pageSize)->select();
 		return $list;
@@ -24,6 +24,10 @@ class MenuModel extends Model {
 	public function edit($data, $where) {
 		$res = Db::name($this->table_name)->where($where)->update($data);
 		return $res;
+	}
+	public function getPage($where) {
+		$list = Db::name($this->table_name)->where($where)->select();
+		return $list;
 	}
 }
 ?>
