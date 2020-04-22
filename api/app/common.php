@@ -9,14 +9,14 @@
 // | Author: 流年 <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 // 密码加密
-public function makePassword($password='') {
+function makePassword($password='') {
     return md5(md5($password) + '_123321');
 }
 /**
 * @author 冯美峰 2020-04-14
 * @return [type] [生成token]
 */
-public function makeToken() {
+function makeToken() {
 $str = md5(uniqid(md5(microtime(true)), true)); // 生成一个不会重复的字符串
 $str = sha1($str); // 加密
 return $str;

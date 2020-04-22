@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-20 14:23:11
- * @LastEditTime: 2020-04-21 15:56:20
+ * @LastEditTime: 2020-04-22 09:53:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\config\index.js
@@ -29,7 +29,7 @@ module.exports = {
 
     // Various Dev Server settings
     host: "localhost", // can be overwritten by process.env.HOST
-    port: 8020, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 8081, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,

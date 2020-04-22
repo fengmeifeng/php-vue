@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-21 11:14:05
- * @LastEditTime: 2020-04-21 14:58:40
+ * @LastEditTime: 2020-04-22 09:44:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\src\util\interceptor.js
@@ -30,7 +30,7 @@ const CODE = {
 }
 process.env.NODE_ENV === 'dev'
   ? (baseUrl = '/v2')
-  : (baseUrl = process.env.VUE_APP_BASE_URL)
+  : (baseUrl = process.env.API_HOST)
 const service = axios.create({
   baseURL: baseUrl
 })
