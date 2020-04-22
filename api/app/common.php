@@ -8,12 +8,18 @@
 // +----------------------------------------------------------------------
 // | Author: 流年 <liu21st@gmail.com>
 // +----------------------------------------------------------------------
-function makePassword($password='') {
-    return md5(md5($password)+ '_123321');
+// 密码加密
+public function makePassword($password='') {
+    return md5(md5($password) + '_123321');
 }
-// 生成token
-function create_token($id, $out_time) {
-    return substr(md5($id.$out_time),5,26);
+/**
+* @author 冯美峰 2020-04-14
+* @return [type] [生成token]
+*/
+public function makeToken() {
+$str = md5(uniqid(md5(microtime(true)), true)); // 生成一个不会重复的字符串
+$str = sha1($str); // 加密
+return $str;
 }
 function is_get() {
    $request = request();
@@ -44,8 +50,7 @@ if (!function_exists('result')) {
      *
      * @return [type] [description]
      */
-    function result($data = '', $code = 0, $msg = '', $type = 'json', $url = '')
-    {
+    function result($data = '', $code = 0, $msg = '', $type = 'json', $url = '') {
         // if (empty($url) && isset($_SERVER["HTTP_REFERER"])) {
         //     $url = $_SERVER["HTTP_REFERER"];
         // }
@@ -85,8 +90,7 @@ if (!function_exists('error')) {
      * @param  string  $data [description]
      * @return [type]        [description]
      */
-    function error($msg = '操作失败', $code = 500, $data = '', $type = '', $url = '')
-    {
+    function error($msg = '操作失败', $code = 500, $data = '', $type = '', $url = '') {
         if ($msg instanceof Exception) {
             list($msg, $code) = array($msg->getMessage(), $msg->getCode());
         }
@@ -112,13 +116,11 @@ if (!function_exists('success')) {
      * @param  string  $url  需要跳转的URL
      *
      */
-    function success($data = '', $msg = '操作成功', $code = 200, $type = '', $url = '')
-    {
+    function success($data = '', $msg = '操作成功', $code = 200, $type = '', $url = '') {
         return result($data, $code, $msg, $type, $url);
     }
 }
-if ( ! function_exists('force_download'))
-{
+if ( ! function_exists('force_download')) {
     /**
      * 强制下载文件函数
      *
@@ -126,14 +128,11 @@ if ( ! function_exists('force_download'))
      * @param   mixed  $path    下载的文件名称
      * @return  void
      */
-    function force_download($filename = '', $down_name = '', $data = NULL)
-    {
-        if ($filename === '' OR $data === '')
-        {
+    function force_download($filename = '', $down_name = '', $data = NULL) {
+        if ($filename === '' OR $data === '') {
             return;
         }
-        elseif ($data === NULL)
-        {
+        elseif ($data === NULL) {
             if ( ! @is_file($filename) OR ($filesize = @filesize($filename)) === FALSE)
             {
                 return;
@@ -142,32 +141,22 @@ if ( ! function_exists('force_download'))
             $filepath = $filename;
             $filename = explode('/', str_replace(DIRECTORY_SEPARATOR, '/', $filename));
             $filename = end($filename);
-        }
-        else
-        {
+        } else {
             $filesize = strlen($data);
         }
-
         // Set the default MIME type to send
         $mime = 'application/octet-stream';
-
         $x = explode('.', $filename);
         $extension = end($x);
-
-        if (count($x) !== 1 && isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/Android\s(1|2\.[01])/', $_SERVER['HTTP_USER_AGENT']))
-        {
+        if (count($x) !== 1 && isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/Android\s(1|2\.[01])/', $_SERVER['HTTP_USER_AGENT'])) {
             $x[count($x) - 1] = strtoupper($extension);
             $filename = implode('.', $x);
         }
-
-        if ($data === NULL && ($fp = @fopen($filepath, 'rb')) === FALSE)
-        {
+        if ($data === NULL && ($fp = @fopen($filepath, 'rb')) === FALSE) {
             return;
         }
-
         // Clean output buffer
-        if (ob_get_level() !== 0 && @ob_end_clean() === FALSE)
-        {
+        if (ob_get_level() !== 0 && @ob_end_clean() === FALSE) {
             @ob_clean();
         }
 
@@ -180,14 +169,12 @@ if ( ! function_exists('force_download'))
         header('Cache-Control: private, no-transform, no-store, must-revalidate');
 
         // If we have raw data - just dump it
-        if ($data !== NULL)
-        {
+        if ($data !== NULL) {
             exit($data);
         }
 
         // Flush 1MB chunks of data
-        while ( ! feof($fp) && ($data = fread($fp, 1048576)) !== FALSE)
-        {
+        while ( ! feof($fp) && ($data = fread($fp, 1048576)) !== FALSE) {
             echo $data;
         }
 
@@ -198,15 +185,13 @@ if ( ! function_exists('force_download'))
 if (!function_exists('show_file')) {
     /**
      * 输出文件展示
-     *
      * @param string $file
      * @param string $title
      * @param array $ban_type
      * @return void
      * @author zmc
      */
-    function show_file($file = '', $title = '', $ban_type = [])
-    {
+    function show_file($file = '', $title = '', $ban_type = []) {
         $default_ban_type = ['php'];
         $ban_type = array_merge($default_ban_type, $ban_type);
         !file_exists($file) && exception("文件不存在");
@@ -234,6 +219,27 @@ if (!function_exists('show_file')) {
         ob_clean();
         flush();
         echo readfile($file);
+        return true;
+    }
+    /**
+    * 阿里云OSS上传
+    * @access public
+    * @param  string   $object 阿里云OSS的存储路径，例如： images/huoduan20180315.jpg
+    * @param  string   $Path   服务器本地的文件路径，例如： /home/www/huoduan/tmp/huoduan20180315.jpg
+    * @param  string   $bucket   阿里云OSS的bucket名称，例如：huoduan
+    * @return bool
+    */
+    function ossUpload($object, $Path, $bucket='huoduan') {
+        //以下配置信息可以放到配置文件里
+        $keyId = '88huoduanCOMiiii';//您的Access Key ID
+        $keySecret = '6yTerXi8dDJiSghiugrtufuTks2OBX';//Access Key Secret
+        $endpoint = 'oss-cn-hangzhou.aliyuncs.com';//阿里云oss外网地址endpoint
+        $oss = new \OSS\OssClient($keyId,$keySecret,$endpoint);
+            try {
+                $oss->uploadFile($bucket, $object, $Path);
+            } catch(\Exception $e) {
+                return $e->getMessage();//如果出错返回错误
+            }
         return true;
     }
 }

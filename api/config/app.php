@@ -142,5 +142,12 @@ return [
     'show_error_msg'         => false,
     // 异常处理handle类 留空使用 \think\exception\Handle
     'exception_handle'       => '',
+    //阿里云OSS配置
+    'aliyun_oss' => [
+        'KeyId'      => '88huoduanCOMiiii',  //您的Access Key ID
+        'KeySecret'  => '6yTerXi8dDJiSghiugrtufuTks2OBX',  //您的Access Key Secret
+        'Endpoint'   => 'oss-cn-hangzhou.aliyuncs.com',  //阿里云oss 外网地址endpoint
+        'Bucket'     => 'huoduan',  //Bucket名称
+    ],
 
 ];
