@@ -1,7 +1,7 @@
 <!--
  * @Author: fengmeifeng
  * @Date: 2020-04-20 14:23:11
- * @LastEditTime: 2020-04-20 15:39:46
+ * @LastEditTime: 2020-04-23 10:36:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\src\App.vue
@@ -19,7 +19,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
 *{
   padding: 0;
   margin: 0;

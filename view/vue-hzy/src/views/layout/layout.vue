@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-04-20 15:02:10
- * @LastEditTime: 2020-04-23 09:14:28
+ * @LastEditTime: 2020-04-23 09:35:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\src\views\layout\layout.vue
@@ -58,8 +58,6 @@ export default {
 .el-main {
 	background-color: #E9EEF3;
 	color: #333;
-	text-align:center;
-	/* line-height:160px; */
 }
 .el-container{
   position: absolute;

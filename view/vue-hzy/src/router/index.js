@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-04-20 14:23:11
- * @LastEditTime: 2020-04-21 09:50:05
+ * @LastEditTime: 2020-04-23 09:33:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\src\router\index.js
@@ -13,6 +13,7 @@ import layout from '@/views/layout/layout.vue'
 import login from '@/views/login/login.vue'
 import index from '@/views/main/main.vue'
 import user from './user/user'
+import menu from './menu/menu'
 
 Vue.use(VueRouter)
 
@@ -38,7 +39,8 @@ const routes = [
         component: index,
         meta: [{ name: '首页' }]
       },
-      ...user
+      ...user,
+      ...menu
     ]
   }
 // eslint-disable-next-line semi

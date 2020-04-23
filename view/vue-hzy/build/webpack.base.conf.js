@@ -1,7 +1,7 @@
 /*
  * @Author: fengmeifeng
  * @Date: 2020-04-20 14:23:11
- * @LastEditTime: 2020-04-21 11:10:12
+ * @LastEditTime: 2020-04-23 10:13:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\build\webpack.base.conf.js
@@ -49,6 +49,10 @@ module.exports = {
   module: {
     rules: [
       // ...(config.dev.useEslint ? [createLintingRule()] : []),
+      {
+        test: /\.scss$/,
+        loaders: ['style','css','sass'],
+      },
       {
         test: /\.less$/,
         loader: "style-loader!css-loader!less-loader",

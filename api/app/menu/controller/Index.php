@@ -35,7 +35,10 @@ class Index extends Base {
 		$pageSize = input('pageSize');
 		$page = input('page');
 		$total = $this->model->getTotal($where);
-		$list = $this->model->getList($where, 'name,pid', $pageSize, $page);
+		$list = $this->model->getList($where, '*', $pageSize, $page);
+		foreach ($list as $k => $v) {
+			$list[$k]['addTime'] = date('Y-m-d H:i:s', $v['add_time']);
+		}
 		$info = [
 			'list'  => $list,
 			'total' => $total,
@@ -144,6 +147,7 @@ class Index extends Base {
     $arr  = array();
     foreach ($category as $key=>$value){
     	$value['index'] = (string)$value['cid'];
+    	$value['scope'] = $value['yingwen'];
       if ($value['pid'] == $pid){
 					// $arr[] = $value;
 					// $this->getSonCategory($category,$value['cid']);

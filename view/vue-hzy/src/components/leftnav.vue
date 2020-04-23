@@ -1,7 +1,7 @@
 <!--
  * @Author: fengmeifeng
  * @Date: 2020-04-20 16:12:20
- * @LastEditTime: 2020-04-22 16:36:31
+ * @LastEditTime: 2020-04-23 14:05:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\src\components\leftnav.vue
@@ -56,7 +56,13 @@ export default {
     return {
 			openeds: [],
 			navLists: [],
-			defaultActive: '/index'
+			defaultActive: '/index',
+			// 页面按钮
+			pageBtns: [],
+			// 列表按钮
+			itemBtns: [],
+			// 所有按钮列表
+			btns: []
 		}
   },
   methods: {
@@ -68,7 +74,9 @@ export default {
 		},
 		changeRouter (index) {
       console.info('路由' + index)
-      this.$router.push(index)
+			this.$router.push(index)
+			// 执行按钮操作
+			this.btnsAssembly(index)
 		},
 		async resolveNeedOpenMenuIndex (menuLists) {
       console.info('菜单啊你到时开啊', menuLists)
@@ -83,10 +91,55 @@ export default {
 			this.navLists = data
 			// 展开菜单
 			// await this.resolveNeedOpenMenuIndex(this.navLists)
+			// 赋值itemBtns
+			this.btns = await this.deepCopy(data)
+			this.$store.commit('useAllBtns', this.btns)
+			console.info(this.btns)
+		},
+		async deepCopy (data) {
+      let lists = []
+      data.length &&
+        data.forEach(el => {
+          el.children.forEach(level2 => {
+            level2.children.forEach(level3 => {
+              lists.push({
+                name: level3.name,
+                path: level3.path,
+                children: level3.children,
+                pageBtns: [],
+                itemBtns: []
+              })
+            })
+          })
+        })
+      for (let i = 0; i < lists.length; i++) {
+        if (lists[i].children && lists[i].children.length) {
+          for (let j = 0; j < lists[i].children.length; j++) {
+            if (lists[i].children[j].is_but === 1) {
+              lists[i].pageBtns.push(lists[i].children[j])
+            } else if (lists[i].children[j].is_but === 2) {
+              lists[i].itemBtns.push(lists[i].children[j])
+            }
+          }
+        }
+      }
+      return lists
+		},
+		async btnsAssembly (currentPath) {
+			console.info(this.$store.getters.allBtns)
+      this.$store.getters.allBtns.forEach(el => {
+        console.info('一动')
+        if (currentPath.includes(el.path)) {
+          this.$store.dispatch('usingCurrentPageBtns', el.pageBtns)
+          this.$store.dispatch('usingCurrentItemBtns', el.itemBtns)
+        }
+      })
+      return true
     }
 	},
 	mounted () {
-    this.menuRequest()
+		this.menuRequest()
+		this.btnsAssembly(this.defaultActive)
 	},
 	updated () {
     this.defaultActive = window.location.href.split('/#')[1]
