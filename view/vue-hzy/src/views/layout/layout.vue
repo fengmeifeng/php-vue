@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-04-20 15:02:10
- * @LastEditTime: 2020-04-23 09:35:00
+ * @LastEditTime: 2020-04-23 16:56:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\src\views\layout\layout.vue
@@ -14,7 +14,7 @@
 		</el-header>
 		<el-container>
 			<!-- 左边 -->
-			<el-aside width="170px">
+			<el-aside width="180px">
 				<leftNav></leftNav>
 			</el-aside>
 			<!-- 主 -->

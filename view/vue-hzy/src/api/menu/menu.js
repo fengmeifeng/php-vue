@@ -1,7 +1,7 @@
 /*
  * @Author: fengmeifeng
  * @Date: 2020-04-23 10:25:15
- * @LastEditTime: 2020-04-23 14:18:55
+ * @LastEditTime: 2020-04-23 15:48:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\src\api\menu\menu.js
@@ -23,3 +23,10 @@ export const LISTS = '/menu'
  * @return:
  */
 export const DEL = '/menu/index//del'
+/**
+ * @description: 栏目详情
+ * @method GET
+ * @param {number} id 栏目ID
+ * @return:
+ */
+export const DETAIL = '/menu/index/detail'

@@ -24,16 +24,21 @@ class Index extends Base {
 	 * @return array
 	 */
 	public function getList() {
-		$where = [
-			'is_delete' => 0,
-			'pid'       =>  input('pid')?:0,
-		];
+		// $where = [
+		// 	'is_delete' => 0,
+		// 	'pid'       =>  input('pid')?:0,
+		// ];
+		$where[] = ['is_delete','=',0];
+		$where[] = ['pid','=',input('pid')?:0];
+
 		$keyword = input('keyword');
 		if (!empty($keyword)) {
-			$where['name'] = ['like', $keyword.'%'];
+			// $where['name'] = ['like', '%'.$keyword.'%'];
+			$where[] = ['name','like',"%".$keyword."%"];
 		}
 		$pageSize = input('pageSize');
 		$page = input('page');
+		// dump($where);
 		$total = $this->model->getTotal($where);
 		$list = $this->model->getList($where, '*', $pageSize, $page);
 		foreach ($list as $k => $v) {
@@ -86,8 +91,9 @@ class Index extends Base {
 	public function update() {
 		if(!is_post()) return error("不是POST提交");
 		$data = $this->check(true);
-		if (empty($data['id'])) return error("ID不能为空");
-		$res = $this->model->edit($data, ['cid'=>$data['id']]);
+		$id = $data['cid'];
+		if (empty($id)) return error("CID不能为空");
+		$res = $this->model->edit($data, ['cid'=>$id]);
 		if (!$res) return error("编辑失败");
 		return success([], "编辑成功");
 	}
@@ -104,9 +110,8 @@ class Index extends Base {
 			'is_delete' => 0,
 			'cid'       => $id,
 		];
-		$field = 'pid,name,path,icon,add_time';
+		$field = 'cid,pid,name,path,icon,isbut,remarks,yingwen';
 		$info = $this->model->getRs($where, $field);
-		$info['add_time'] = date('Y-m-d H:i:s', $info['add_time']);
 		return success($info);
 	}
 	/**

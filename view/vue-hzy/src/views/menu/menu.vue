@@ -1,7 +1,7 @@
 <!--
  * @Author: fengmeifeng
  * @Date: 2020-04-23 09:30:23
- * @LastEditTime: 2020-04-23 14:30:14
+ * @LastEditTime: 2020-04-23 15:54:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\src\views\menu\menu.vue
@@ -28,7 +28,7 @@
             icon="el-icon-search"
             size="small"
             type="primary"
-            @click="getMenuList"
+            @click="search"
           >查询
           </el-button>
           <el-button icon="el-icon-refresh-left" size="small" @click="reset">重置</el-button>
@@ -71,11 +71,13 @@
       </el-card>
     </main>
     <add ref='addMenu' @lists='getMenuList'></add>
+    <edit ref='editMenu' @lists='getMenuList'></edit>
   </div>
 </template>
 <script>
 import pagination from '../../components/pagination/pagination.vue'
 import add from './add/add.vue'
+import edit from './edit/edit.vue'
 import { LISTS, DEL } from '@/api/menu/menu'
 import { getRequest, postRequest } from '@/util/ajax'
 import { successMessage, errorMessage } from '@/util/message'
@@ -85,7 +87,8 @@ export default {
   name: 'menuManage',
   components: {
     pagination,
-    add
+    add,
+    edit
   },
   data () {
     return {
@@ -152,25 +155,26 @@ export default {
       this.totalCount = data.total
       this.lists = data.list
     },
+    search () {
+      this.getMenuList(1)
+    },
     reset () {
       this.searchParam.name = ''
-      this.getMenuList()
+      this.getMenuList(1)
     },
     // 增删改查统一处理
     handleClick (row, button) {
       console.info(button)
       switch (button) {
         case 'edit': {
-          console.log('edit')
+          this.$refs.editMenu.show(row.cid)
           break
         }
         case 'del': {
-          this.del(row.id)
-          console.log('del')
+          this.del(row.cid)
           break
         }
         case 'watch': {
-          console.log('watch')
           this.$router.push({
             name: 'menuManageWatch',
             params: { id: row.id }
@@ -192,7 +196,7 @@ export default {
         if (action === 'cancel') {
           return
         }
-        const { code, msg } = await postRequest(`${DEL}${id}`)
+        const { code, msg } = await postRequest(`${DEL}`, {id: id})
         if (code === 500) {
           return errorMessage(msg)
         }
