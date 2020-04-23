@@ -43,7 +43,7 @@ class User extends Base {
    * @return data
    */
   public function check() {
-    $data = $this->request->param();
+    $data = input();
     $validate = new LoginValidate;
     if (!$validate->check($data)) {          
       return error($validate->getError());

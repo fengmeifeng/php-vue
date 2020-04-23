@@ -32,7 +32,7 @@ class Login {
   }
   // 验证登录
   public function checkLogin($data) {
-    $field = 'id,username,sex,job,time_out';
+    $field = 'id,username,name,email,sex,job,time_out';
     $info = $this->model->getRs(["username" => $data['username']], $field);
     if (empty($info)) return "用户不存在";
     $where = [

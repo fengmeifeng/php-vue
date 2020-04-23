@@ -43,7 +43,7 @@ class Index extends Base {
 		return success($info);
 	}
 	public function check($isEdit = false) {
-		$data = $this->request->param();
+		$data = input();
     if (!$this->validate->check($data)) {          
       return error($this->validate->getError());
     }

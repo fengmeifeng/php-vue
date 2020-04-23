@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-04-20 15:02:10
- * @LastEditTime: 2020-04-21 09:38:37
+ * @LastEditTime: 2020-04-23 09:14:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\src\views\layout\layout.vue
@@ -14,7 +14,7 @@
 		</el-header>
 		<el-container>
 			<!-- 左边 -->
-			<el-aside width="180px">
+			<el-aside width="170px">
 				<leftNav></leftNav>
 			</el-aside>
 			<!-- 主 -->
@@ -43,22 +43,23 @@ export default {
 </script>
 <style>
 .el-header {
-	background-color: #545c64;
+	background-color: #fff;
 	color: #333;
 	text-align:center;
-	line-height:60px;
+	height: 50px !important;
+	line-height:50px;
 }
 .el-aside {
 	background-color: #D3DCE6;
 	color: #333;
 	text-align:center;
-	line-height:200px;
+	/* line-height:200px; */
 }
 .el-main {
 	background-color: #E9EEF3;
 	color: #333;
 	text-align:center;
-	line-height:160px;
+	/* line-height:160px; */
 }
 .el-container{
   position: absolute;

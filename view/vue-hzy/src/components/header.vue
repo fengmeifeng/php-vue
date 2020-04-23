@@ -1,15 +1,15 @@
 <!--
  * @Author: fengmeifeng
  * @Date: 2020-04-20 16:11:54
- * @LastEditTime: 2020-04-22 15:51:30
+ * @LastEditTime: 2020-04-23 09:20:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\src\components\header.vue
  -->
 <template>
   <div class="main">
-    <div class="left c-fff">后台管理系统</div>
-    <div class="right">
+    <div class="left t-c width-170">后台管理系统</div>
+    <div class="right m-r-10">
       <el-dropdown>
         <div>
           <img
@@ -29,7 +29,7 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
-    <div class="right c-fff m-r-10"><span>您好，{{ userName }}</span></div>
+    <div class="right m-r-10"><span>您好，{{ userName }}</span></div>
   </div>
 </template>
 <script>
@@ -42,7 +42,7 @@ export default {
     return {
       activeIndex: '1',
       userName: '',
-      headerImg: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1587447090979&di=15927a9e64433c67e87dc7b02f4b1724&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fforum%2Fpic%2Fitem%2Fad1e93b2551ca64713df9b13.jpg%3Fv%3Dtbs'
+      headerImg: 'http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20190207/df71e02d3f4948a58884fab5f16054e0.jpeg'
     }
   },
   methods: {
@@ -70,24 +70,10 @@ export default {
   }
 }
 </script>
-<style scoped>
-.m-r-10 {
-  margin-right: 10px;
-}
-.c-fff {
-  color: #fff;
-}
-.left {
-  float: left;
-}
-.right {
-  float: right;
-}
+<style lang="less" scoped>
+@import "../assets/styles/less/atom.less";
 img {
   vertical-align: middle;
   border-radius: 50%;
-}
-.el-dropdown {
-  color: #fff;
 }
 </style>
