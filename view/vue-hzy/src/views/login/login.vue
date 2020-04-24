@@ -2,7 +2,7 @@
 <!--
  * @Author: fengmeifeng
  * @Date: 2020-04-20 15:02:52
- * @LastEditTime: 2020-04-22 10:16:02
+ * @LastEditTime: 2020-04-24 15:12:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\src\views\login\login.vue
@@ -18,7 +18,7 @@
       label-width="0px"
       class="demo-ruleForm login-page"
     >
-      <h3 class="title">系统登录</h3>
+      <h3 class="title">管理中心登录</h3>
       <el-form-item prop="username">
           <el-input type="text" v-model="ruleForm.username" auto-complete="off" placeholder="用户名">
           </el-input>
@@ -123,21 +123,35 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+/deep/ .el-checkbox {
+  color: #fff;
+}
 .login-container {
+    color:#fff;
     width: 100%;
     height: 100%;
-    background: #4373a5;
+    // background: #4373a5;
+    opacity: 0.9;
+    // background: linear-gradient(to bottom right,#4373a5, #51b48e);
+    background: url('../../assets/img/login/bg.jpg');
+    background-size: cover;
     /* 登录框上下对齐 */
+    position: absolute;
     display: flex;
     align-items: center;
 }
 .login-page {
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    margin:0px auto;
+    margin: auto;
+    display: table-cell;
+    vertical-align: middle;
     width: 350px;
-    padding: 20px 35px 35px 15px;
-    background: #fff;
+    padding: 60px 35px 60px 35px;
+    // background: #fff;
+    background: rgba(0,0,0,.5);
+    color:#fff;
+    // background-color:transparent;
     border: 1px solid #eaeaea;
     box-shadow: 0 0 25px #cac6c6;
 }
@@ -146,6 +160,7 @@ label.el-checkbox.rememberme {
     text-align: left;
 }
 .title {
+  height: 60px;
   line-height: 60px;
   text-align: center;
 }

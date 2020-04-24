@@ -1,7 +1,7 @@
 <!--
  * @Author: fengmeifeng
  * @Date: 2020-04-23 09:30:23
- * @LastEditTime: 2020-04-23 15:54:30
+ * @LastEditTime: 2020-04-24 15:15:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\src\views\menu\menu.vue
@@ -44,7 +44,7 @@
               :type="type"
               :width="width"
             ></el-table-column>
-            <el-table-column label="操作" width="280">
+            <el-table-column label="操作" width="260">
               <template slot-scope="scope">
                 <el-button
                   @click="handleClick(scope.row, item.scope)"

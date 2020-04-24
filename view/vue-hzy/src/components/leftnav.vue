@@ -1,7 +1,7 @@
 <!--
  * @Author: fengmeifeng
  * @Date: 2020-04-20 16:12:20
- * @LastEditTime: 2020-04-23 14:05:44
+ * @LastEditTime: 2020-04-24 13:46:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\src\components\leftnav.vue
@@ -115,9 +115,9 @@ export default {
       for (let i = 0; i < lists.length; i++) {
         if (lists[i].children && lists[i].children.length) {
           for (let j = 0; j < lists[i].children.length; j++) {
-            if (lists[i].children[j].is_but === 1) {
+            if (lists[i].children[j].isbut === 1) {
               lists[i].pageBtns.push(lists[i].children[j])
-            } else if (lists[i].children[j].is_but === 2) {
+            } else if (lists[i].children[j].isbut === 2) {
               lists[i].itemBtns.push(lists[i].children[j])
             }
           }
@@ -127,6 +127,7 @@ export default {
 		},
 		async btnsAssembly (currentPath) {
 			console.info(this.$store.getters.allBtns)
+			console.info(currentPath)
       this.$store.getters.allBtns.forEach(el => {
         console.info('一动')
         if (currentPath.includes(el.path)) {

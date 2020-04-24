@@ -1,7 +1,7 @@
 /*
  * @Author: fengmeifeng
  * @Date: 2020-04-20 14:23:11
- * @LastEditTime: 2020-04-22 14:52:18
+ * @LastEditTime: 2020-04-24 14:39:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\src\main.js
@@ -16,6 +16,7 @@ import store from './store'
 /* 引入ElementUI */
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import './assets/styles/reset.css'
 
 import Router from 'vue-router'
 Vue.use(ElementUI)
