@@ -1,7 +1,7 @@
 <!--
  * @Author: fengmeifeng
  * @Date: 2020-04-23 10:34:02
- * @LastEditTime: 2020-04-23 13:49:55
+ * @LastEditTime: 2020-05-06 10:29:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\src\views\menu\add\add.vue
@@ -47,11 +47,11 @@
               placeholder="请输入英文"
             ></el-input>
           </el-form-item>
-            <el-form-item label="是否是按钮" prop="is_but">
-              <el-radio-group v-model="ruleForm.is_but">
-                <el-radio label="0">否</el-radio>
-                <el-radio label="1">页面按钮</el-radio>
-                <el-radio label="2">列表按钮</el-radio>
+            <el-form-item label="是否是按钮" prop="isbut">
+              <el-radio-group v-model="ruleForm.isbut">
+                <el-radio :label="0">否</el-radio>
+                <el-radio :label="1">页面按钮</el-radio>
+                <el-radio :label="2">列表按钮</el-radio>
               </el-radio-group>
             </el-form-item>
           <el-form-item label="备注:" prop="remarks">
@@ -86,7 +86,7 @@ export default {
         path: '',
         icon: '',
         yingwen: '',
-        is_but: 0,
+        isbut: 0,
         remarks: ''
       },
       rules: {

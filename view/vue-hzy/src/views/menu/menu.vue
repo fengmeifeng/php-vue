@@ -1,7 +1,7 @@
 <!--
  * @Author: fengmeifeng
  * @Date: 2020-04-23 09:30:23
- * @LastEditTime: 2020-04-24 15:15:54
+ * @LastEditTime: 2020-04-24 15:25:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-hzy\src\views\menu\menu.vue
@@ -177,7 +177,7 @@ export default {
         case 'watch': {
           this.$router.push({
             name: 'menuManageWatch',
-            params: { id: row.id }
+            params: { id: row.cid }
           })
           break
         }
