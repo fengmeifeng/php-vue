@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 // 密码加密
 function makePassword($password='') {
-    return md5(md5($password) + '_123321');
+    return md5(md5($password).'_123321');
 }
 /**
 * @author 冯美峰 2020-04-14

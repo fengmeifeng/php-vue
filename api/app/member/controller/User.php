@@ -42,15 +42,28 @@ class User extends Base {
    * @author 冯美峰 2020-04-15
    * @return data
    */
-  public function check() {
+  public function check($isEdit = false) {
     $data = input();
     $validate = new LoginValidate;
     if (!$validate->check($data)) {          
       return error($validate->getError());
     }
     $data['password'] = makePassword($data['password']);
-    $data['add_time'] = time();
+
+    if (!$isEdit) $data['add_time'] = time();
     return $data;
+  }
+  /**
+   * 修改用户基本信息
+   * @author 冯美峰 2020-04-28
+   * @return 
+   */
+  public function updateInfo() {
+    if (!is_post()) return error("请用POST方式提交");
+    $data = $this->check(true);
+    $res = $this->model->updateData($data, ['id'=>$data['id']]);
+    if (!$res) return error("修改失败");
+    return success([], '修改成功');
   }
 }
 ?>
